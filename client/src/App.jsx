@@ -100,7 +100,9 @@ function App() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(
+  () => localStorage.getItem("wealthflow_token") || ""
+);
   const [transactions, setTransactions] = useState([]);
   const [transactionForm, setTransactionForm] = useState(emptyTransaction);
   const [search, setSearch] = useState("");
@@ -424,6 +426,8 @@ console.log("Date filter:", dateFilter);
         setName("");
         setPassword("");
       } else {
+        localStorage.setItem("wealthflow_token", data.token);
+        localStorage.setItem("wealthflow_user", JSON.stringify(data.user));
         setToken(data.token);
         setUser(data.user);
         setMonthlyBudget(
@@ -659,6 +663,8 @@ if (
   }
 
   function logout() {
+  localStorage.removeItem("wealthflow_token");
+localStorage.removeItem("wealthflow_user");
     setToken("");
     setUser(null);
     setTransactions([]);
