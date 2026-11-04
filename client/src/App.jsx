@@ -98,6 +98,7 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState("");
   const [transactions, setTransactions] = useState([]);
@@ -742,10 +743,10 @@ if (
               />
             </label>
 
-            <label className="field">
-              <span>Password</span>
+             <div className="field">
+            <div className="password-input-wrap">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder={
                   authMode === "register"
                     ? "Create a strong password"
@@ -762,7 +763,34 @@ if (
                 maxLength={72}
                 required
               />
-            </label>
+            
+
+           <button
+  type="button"
+  className="password-toggle"
+  onClick={() => setShowPassword(!showPassword)}
+  aria-label={showPassword ? "Hide password" : "Show password"}
+>
+  {showPassword ? (
+    <svg viewBox="0 0 24 24" width="20" height="20"
+      fill="none" stroke="currentColor" strokeWidth="2"
+      strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 3l18 18" />
+      <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8" />
+      <path d="M9.9 5.2A11 11 0 0 1 12 5c5 0 9 7 9 7a15 15 0 0 1-3 3.7" />
+      <path d="M6.2 6.2C4.1 7.6 3 12 3 12s4 7 9 7a10 10 0 0 0 3-.5" />
+    </svg>
+  ) : (
+    <svg viewBox="0 0 24 24" width="20" height="20"
+      fill="none" stroke="currentColor" strokeWidth="2"
+      strokeLinecap="round" strokeLinejoin="round">
+      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  )}
+</button>
+</div>
+</div>
 
             {authMode === "register" && (
               <div className="password-hint">
