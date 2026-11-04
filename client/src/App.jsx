@@ -99,7 +99,13 @@ function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+  try {
+    return JSON.parse(localStorage.getItem("wealthflow_user")) || null;
+  } catch {
+    return null;
+  }
+});
   const [token, setToken] = useState(
   () => localStorage.getItem("wealthflow_token") || ""
 );
