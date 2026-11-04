@@ -2,7 +2,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const CATEGORIES = [
   "Food", "Transport", "Shopping", "Bills", "Education",
